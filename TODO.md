@@ -32,6 +32,17 @@
 - Bisher gibt es Phasenverzögerung nur im Modus „Mit Schutzlogik“, zusammen mit Start-/Stoppverzögerung und Mindeständerung.
 - **Wann:** Bei Bedarf, einfach halten. Test vom 07.11.2026 erledigt: Die Easee macht den Wechsel selbst sauber (siehe oben).
 
+## Für ein größeres Update (gesammelt)
+
+### Wallbox aus der Liste auswählen
+- Die Wallbox-Instanz zeigt die Wallboxen des Easee-Kontos schon als Liste. Neu: Zeile anklicken → Seriennummer steht im Feld (statt abtippen).
+- Kleiner Aufwand, spart Tippfehler.
+
+### Konfigurator für mehrere Wallboxen
+- Eigenes Modul „Easee Konfigurator“ an der Cloud-Instanz: listet alle Wallboxen des Kontos und legt die Instanzen per Klick an.
+- Eine Discovery passt nicht (die sucht im eigenen Netzwerk und muss ohne Einrichtung laufen; die Easee ist nur über das Cloud-Konto erreichbar).
+- **Wann:** Wenn sich Nutzer mit mehreren Wallboxen melden.
+
 ## Noch zu testen (mit Auto)
 - ✔ 04.10.2026: 1-phasig 6–15 A, 3-phasig 15 A, Pause, Wechsel 1 → 3 (mit Pause) und 3 → 1 (ohne Pause) funktionieren.
 - ✔ Wächter „lädt trotz Pause“ hat in der Praxis gegriffen (04.10.2026, 13:17). Offen: Anstecken bei Vorgabe 0, Einschalten der Wallbox bei Vorgabe 0.
