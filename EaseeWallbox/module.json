@@ -1,0 +1,18 @@
+{
+    "id": "{CCADEC79-15D9-4F0D-9C91-31975CCF5538}",
+    "name": "EaseeWallbox",
+    "type": 3,
+    "vendor": "Easee",
+    "aliases": [
+        "Easee Wallbox"
+    ],
+    "parentRequirements": [
+        "{2B9E74AC-9022-4EC7-B69F-1DAA196FCFF2}"
+    ],
+    "childRequirements": [],
+    "implemented": [
+        "{3E70FDCF-D9DC-496B-A244-7F57E810FC0B}"
+    ],
+    "prefix": "EASEE",
+    "url": "https://github.com/peterchrisben/EaseeWallbox"
+}

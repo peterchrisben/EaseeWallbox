@@ -1,0 +1,21 @@
+{
+    "id": "{5FD11832-BF89-40A8-B49B-405783EEB6B5}",
+    "name": "EaseeCloud",
+    "type": 2,
+    "vendor": "Easee",
+    "aliases": [
+        "Easee Cloud"
+    ],
+    "parentRequirements": [
+        "{79827379-F36E-4ADA-8A95-5F8D1DC92FA9}"
+    ],
+    "childRequirements": [
+        "{3E70FDCF-D9DC-496B-A244-7F57E810FC0B}"
+    ],
+    "implemented": [
+        "{018EF6B5-AB94-40C6-AA53-46943E824ACF}",
+        "{2B9E74AC-9022-4EC7-B69F-1DAA196FCFF2}"
+    ],
+    "prefix": "EASEECLOUD",
+    "url": "https://github.com/peterchrisben/EaseeWallbox"
+}

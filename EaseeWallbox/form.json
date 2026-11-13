@@ -1,0 +1,429 @@
+{
+    "elements": [
+        {
+            "type": "CheckBox",
+            "name": "ModuleActive",
+            "caption": "Modul aktiv"
+        },
+        {
+            "type": "Label",
+            "caption": "Aus: Symcon steuert die Wallbox nicht mehr – sie wird nur noch über die Easee-App gesteuert. Die Werte werden weiter angezeigt."
+        },
+        {
+            "type": "ValidationTextBox",
+            "name": "ChargerID",
+            "caption": "Seriennummer der Wallbox (z. B. EH123456)"
+        },
+        {
+            "type": "CheckBox",
+            "name": "LoxoneMode",
+            "caption": "Darstellung für Loxone (Variablennamen wie der Loxone-Wallbox-Baustein)",
+            "onChange": "IPS_RequestAction($id, 'FormLoxoneMode', $LoxoneMode);"
+        },
+        {
+            "type": "ExpansionPanel",
+            "name": "LoxonePanel",
+            "caption": "Loxone",
+            "expanded": true,
+            "visible": true,
+            "items": [
+                {
+                    "type": "Label",
+                    "caption": "Die Variablen heißen wie die Ein- und Ausgänge des Wallbox-Bausteins in Loxone Config (Kürzel in Klammern). Typ und Einheit passen zum Baustein. Eigene Namen bleiben erhalten."
+                },
+                {
+                    "type": "Label",
+                    "name": "LoxoneUnitHint",
+                    "caption": "Hinweis: Der Wallbox-Baustein arbeitet mit kW – „Einheit der Ladeleistung“ auf kW stellen.",
+                    "visible": false
+                },
+                {
+                    "type": "List",
+                    "name": "LoxoneList",
+                    "caption": "Zuordnung zum Loxone-Wallbox-Baustein",
+                    "rowCount": 6,
+                    "add": false,
+                    "delete": false,
+                    "columns": [
+                        {
+                            "caption": "Baustein",
+                            "name": "block",
+                            "width": "110px"
+                        },
+                        {
+                            "caption": "Variable",
+                            "name": "variable",
+                            "width": "auto"
+                        },
+                        {
+                            "caption": "ID",
+                            "name": "id",
+                            "width": "80px"
+                        },
+                        {
+                            "caption": "Typ",
+                            "name": "type",
+                            "width": "100px"
+                        },
+                        {
+                            "caption": "Richtung",
+                            "name": "direction",
+                            "width": "150px"
+                        }
+                    ],
+                    "values": []
+                }
+            ]
+        },
+        {
+            "type": "ExpansionPanel",
+            "caption": "Ladeleistung und Regelung",
+            "expanded": true,
+            "items": [
+                {
+                    "type": "Select",
+                    "name": "PowerUnit",
+                    "caption": "Einheit der Ladeleistung",
+                    "options": [
+                        {
+                            "caption": "kW",
+                            "value": 0
+                        },
+                        {
+                            "caption": "W",
+                            "value": 1
+                        }
+                    ]
+                },
+                {
+                    "type": "Select",
+                    "name": "ControlMode",
+                    "caption": "Regelmodus",
+                    "options": [
+                        {
+                            "caption": "Direkt – die Vorgabe wird sofort umgesetzt (übergeordnete Regelung, z. B. Loxone)",
+                            "value": 0
+                        },
+                        {
+                            "caption": "Mit Schutzlogik – Verzögerungen und Hysterese im Modul",
+                            "value": 1
+                        }
+                    ]
+                },
+                {
+                    "type": "Select",
+                    "name": "UnderMinimum",
+                    "caption": "Vorgabe unter Mindeststrom (ca. 1,4 kW)",
+                    "options": [
+                        {
+                            "caption": "Pause",
+                            "value": 0
+                        },
+                        {
+                            "caption": "Mit Mindeststrom laden",
+                            "value": 1
+                        }
+                    ]
+                },
+                {
+                    "type": "Select",
+                    "name": "GapMode",
+                    "caption": "Vorgabe zwischen 1- und 3-phasig (ca. 3,7 – 4,1 kW)",
+                    "options": [
+                        {
+                            "caption": "Nicht überschreiten (1-phasig Maximum)",
+                            "value": 0
+                        },
+                        {
+                            "caption": "Nächster Wert",
+                            "value": 1
+                        }
+                    ]
+                },
+                {
+                    "type": "Select",
+                    "name": "Rounding",
+                    "caption": "Umrechnung in Ampere",
+                    "options": [
+                        {
+                            "caption": "Abrunden (nie mehr als vorgegeben)",
+                            "value": 0
+                        },
+                        {
+                            "caption": "Runden",
+                            "value": 1
+                        }
+                    ]
+                },
+                {
+                    "type": "Select",
+                    "name": "CurrentStep",
+                    "caption": "Stromauflösung",
+                    "options": [
+                        {
+                            "caption": "1 A",
+                            "value": 0
+                        },
+                        {
+                            "caption": "0,1 A (im Test prüfen, ob die Wallbox das umsetzt)",
+                            "value": 1
+                        }
+                    ]
+                },
+                {
+                    "type": "NumberSpinner",
+                    "name": "MinCurrent",
+                    "caption": "Mindeststrom",
+                    "suffix": "A",
+                    "minimum": 6,
+                    "maximum": 16
+                },
+                {
+                    "type": "NumberSpinner",
+                    "name": "MaxCurrent",
+                    "caption": "Höchststrom je Phase",
+                    "suffix": "A",
+                    "minimum": 6,
+                    "maximum": 32
+                },
+                {
+                    "type": "NumberSpinner",
+                    "name": "Voltage",
+                    "caption": "Spannung je Phase",
+                    "suffix": "V",
+                    "minimum": 200,
+                    "maximum": 250
+                },
+                {
+                    "type": "Select",
+                    "name": "GridType",
+                    "caption": "Anschluss der Wallbox (für die Anzeige der Ströme)",
+                    "options": [
+                        {
+                            "caption": "3 Phasen + N + PE (in Deutschland üblich)",
+                            "value": 0
+                        },
+                        {
+                            "caption": "Ohne N (IT-Netz, z. B. Norwegen)",
+                            "value": 1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "ExpansionPanel",
+            "caption": "Phasenumschaltung",
+            "items": [
+                {
+                    "type": "Label",
+                    "caption": "Die Phasenwahl (automatisch / fest 1 / fest 3) ist eine Variable der Instanz. Für die Automatik muss der Phasenmodus der Wallbox auf \"Automatisch\" stehen (Button unten)."
+                },
+                {
+                    "type": "Label",
+                    "caption": "Beim Phasenwechsel unterbricht die Easee die Ladung selbst kurz (ca. 15–20 s), schaltet um und lädt dann weiter."
+                },
+                {
+                    "type": "CheckBox",
+                    "name": "LogPhaseSwitch",
+                    "caption": "Phasenwechsel im Symcon-Log melden"
+                }
+            ]
+        },
+        {
+            "type": "ExpansionPanel",
+            "caption": "Schutzlogik (nur Regelmodus \"Mit Schutzlogik\")",
+            "items": [
+                {
+                    "type": "NumberSpinner",
+                    "name": "StartDelay",
+                    "caption": "Startverzögerung",
+                    "suffix": "s",
+                    "minimum": 0
+                },
+                {
+                    "type": "NumberSpinner",
+                    "name": "StopDelay",
+                    "caption": "Stoppverzögerung",
+                    "suffix": "s",
+                    "minimum": 0
+                },
+                {
+                    "type": "NumberSpinner",
+                    "name": "PhaseDelay",
+                    "caption": "Phasenwechsel erst nach",
+                    "suffix": "s",
+                    "minimum": 0
+                },
+                {
+                    "type": "NumberSpinner",
+                    "name": "PhaseMinInterval",
+                    "caption": "Mindestabstand zwischen Phasenwechseln",
+                    "suffix": "s",
+                    "minimum": 0
+                },
+                {
+                    "type": "NumberSpinner",
+                    "name": "MinChange",
+                    "caption": "Mindeständerung",
+                    "suffix": "W",
+                    "minimum": 0
+                }
+            ]
+        },
+        {
+            "type": "ExpansionPanel",
+            "caption": "Sicherheit",
+            "items": [
+                {
+                    "type": "Label",
+                    "caption": "Ablaufzeit der Stromvorgabe: Nach Ablauf gilt wieder der normale Circuit-Strom der Wallbox (ohne Equalizer meist volle Leistung!). 0 = kein Ablauf (empfohlen). Bei Ablaufzeit sendet das Modul die Vorgabe rechtzeitig erneut."
+                },
+                {
+                    "type": "NumberSpinner",
+                    "name": "TimeToLive",
+                    "caption": "Ablaufzeit",
+                    "suffix": "min",
+                    "minimum": 0,
+                    "maximum": 1440
+                }
+            ]
+        },
+        {
+            "type": "ExpansionPanel",
+            "caption": "Abfrageintervalle",
+            "items": [
+                {
+                    "type": "Label",
+                    "caption": "Mit Push kommen die Werte sofort; die Abfrage ist dann nur eine Sicherheitsprüfung. Easee erlaubt 100 Statusabfragen je 5 Minuten (für das ganze Konto)."
+                },
+                {
+                    "type": "NumberSpinner",
+                    "name": "PollWithPush",
+                    "caption": "Mit Push",
+                    "suffix": "s",
+                    "minimum": 60
+                },
+                {
+                    "type": "NumberSpinner",
+                    "name": "PollCharging",
+                    "caption": "Ohne Push – lädt",
+                    "suffix": "s",
+                    "minimum": 10
+                },
+                {
+                    "type": "NumberSpinner",
+                    "name": "PollConnected",
+                    "caption": "Ohne Push – Fahrzeug angesteckt",
+                    "suffix": "s",
+                    "minimum": 10
+                },
+                {
+                    "type": "NumberSpinner",
+                    "name": "PollIdle",
+                    "caption": "Ohne Push – kein Fahrzeug",
+                    "suffix": "s",
+                    "minimum": 30
+                },
+                {
+                    "type": "CheckBox",
+                    "name": "LiveMeter",
+                    "caption": "Zählerstand zwischen den Cloud-Updates fortschreiben"
+                },
+                {
+                    "type": "Label",
+                    "caption": "Die Easee-Cloud meldet den Zählerstand (Mr) nur etwa einmal pro Stunde – auch die Easee-App zeigt ihn so. Mit dem Häkchen rechnet das Modul dazwischen: letzter Cloud-Zählerstand + Energie, die die Wallbox seitdem für den Ladevorgang gemeldet hat (alle paar Minuten). Es wird nichts aus Leistung und Zeit geschätzt."
+                },
+                {
+                    "type": "Label",
+                    "caption": "Der Wert läuft nie rückwärts. Liegt er beim nächsten Cloud-Wert etwas zu hoch, bleibt er kurz stehen, bis der echte Zählerstand ihn eingeholt hat. Ohne Häkchen wird der Cloud-Wert unverändert angezeigt (wie bisher)."
+                }
+            ]
+        }
+    ],
+    "actions": [
+        {
+            "type": "List",
+            "name": "FoundChargers",
+            "caption": "Wallboxen im Easee-Konto",
+            "rowCount": 3,
+            "columns": [
+                {
+                    "caption": "Seriennummer",
+                    "name": "id",
+                    "width": "150px"
+                },
+                {
+                    "caption": "Name",
+                    "name": "name",
+                    "width": "auto"
+                }
+            ],
+            "values": []
+        },
+        {
+            "type": "RowLayout",
+            "items": [
+                {
+                    "type": "Button",
+                    "caption": "Jetzt aktualisieren",
+                    "onClick": "EASEE_Update($id);"
+                },
+                {
+                    "type": "Button",
+                    "caption": "Berechnung anzeigen",
+                    "onClick": "EASEE_GetCalculation($id);"
+                },
+                {
+                    "type": "Button",
+                    "caption": "Phasenmodus der Wallbox auf Automatisch",
+                    "onClick": "EASEE_SetChargerPhaseModeAuto($id);",
+                    "confirm": "Phasenmodus der Wallbox dauerhaft auf Automatisch stellen?"
+                },
+                {
+                    "type": "Button",
+                    "caption": "Wallbox neu starten",
+                    "onClick": "EASEE_Reboot($id);",
+                    "confirm": "Wallbox wirklich neu starten?"
+                }
+            ]
+        },
+        {
+            "type": "Label",
+            "name": "CalcResult",
+            "caption": ""
+        }
+    ],
+    "status": [
+        {
+            "code": 102,
+            "icon": "active",
+            "caption": "OK"
+        },
+        {
+            "code": 104,
+            "icon": "inactive",
+            "caption": "Modul ausgeschaltet (Schalter „Modul aktiv“)"
+        },
+        {
+            "code": 202,
+            "icon": "inactive",
+            "caption": "Bitte Seriennummer der Wallbox eintragen"
+        },
+        {
+            "code": 200,
+            "icon": "error",
+            "caption": "Keine Verbindung zur Easee Cloud – Cloud-Instanz prüfen"
+        },
+        {
+            "code": 201,
+            "icon": "error",
+            "caption": "Wallbox im Easee-Konto nicht gefunden – Seriennummer prüfen"
+        },
+        {
+            "code": 203,
+            "icon": "error",
+            "caption": "Phasenmodus der Wallbox ist nicht Automatisch – Phasenumschaltung nicht möglich"
+        }
+    ]
+}

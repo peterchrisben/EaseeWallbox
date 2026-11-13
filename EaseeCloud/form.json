@@ -1,0 +1,48 @@
+{
+    "elements": [
+        {
+            "type": "Label",
+            "caption": "Zugangsdaten wie in der Easee-App (E-Mail oder Telefonnummer mit Ländervorwahl)."
+        },
+        {
+            "type": "ValidationTextBox",
+            "name": "Username",
+            "caption": "Benutzer"
+        },
+        {
+            "type": "PasswordTextBox",
+            "name": "Password",
+            "caption": "Passwort"
+        },
+        {
+            "type": "CheckBox",
+            "name": "UsePush",
+            "caption": "Werte per Push empfangen (SignalR, empfohlen – spart Abfragen)"
+        }
+    ],
+    "actions": [
+        {
+            "type": "Button",
+            "caption": "Verbindung testen",
+            "onClick": "EASEECLOUD_TestConnection($id);"
+        },
+        {
+            "type": "Label",
+            "name": "TestResult",
+            "caption": ""
+        },
+        {
+            "type": "Button",
+            "caption": "Push neu verbinden",
+            "onClick": "EASEECLOUD_ReconnectPush($id);"
+        }
+    ],
+    "status": [
+        { "code": 102, "icon": "active", "caption": "Angemeldet" },
+        { "code": 104, "icon": "inactive", "caption": "Bitte Benutzer und Passwort eintragen" },
+        { "code": 201, "icon": "error", "caption": "Anmeldung fehlgeschlagen – Benutzer/Passwort prüfen" },
+        { "code": 202, "icon": "error", "caption": "API-Limit erreicht – kurze Pause, danach automatisch weiter" },
+        { "code": 203, "icon": "error", "caption": "Easee blockiert diese IP-Adresse vorübergehend (zu viele Anfragen)" },
+        { "code": 204, "icon": "error", "caption": "Easee-Cloud nicht erreichbar" }
+    ]
+}
