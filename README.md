@@ -3,7 +3,7 @@
 Symcon-Bibliothek für die **Easee Home** Wallbox über die Easee-Cloud.
 Die Ladeleistung lässt sich von außen vorgeben (Skript, Ablaufplan, Energiemanager). Für den Wallbox-Baustein von Loxone gibt es eine passende Darstellung.
 
-**Aktuelle Version:** 1.0 (Build 16, 13.11.2026)
+**Aktuelle Version:** 1.0 (Build 17, 16.11.2026)
 
 ## Warum Cloud?
 

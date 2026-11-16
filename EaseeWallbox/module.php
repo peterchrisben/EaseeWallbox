@@ -577,6 +577,8 @@ class EaseeWallbox extends IPSModule
     {
         $intervals = [];
         foreach ($options as $value => $caption) {
+            // Nur die nötigen Schlüssel: Symcon 9.1 prüft die Unterparameter streng und lehnt
+            // unbekannte ab (dann bricht „Übernehmen“ ab). Abgeschaltete Überschreibungen brauchen keine Werte.
             $intervals[] = [
                 'IntervalMinValue' => (int) $value,
                 'IntervalMaxValue' => (int) $value,
@@ -584,15 +586,10 @@ class EaseeWallbox extends IPSModule
                 'ConstantValue'    => (string) $caption,
                 'ConversionFactor' => 1,
                 'PrefixActive'     => false,
-                'PrefixValue'      => '',
                 'SuffixActive'     => false,
-                'SuffixValue'      => '',
                 'DigitsActive'     => false,
-                'DigitsValue'      => 0,
                 'IconActive'       => false,
-                'IconValue'        => '',
-                'ColorActive'      => false,
-                'Color'            => -1
+                'ColorActive'      => false
             ];
         }
         return [
