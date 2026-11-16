@@ -24,7 +24,7 @@ Beim Anlegen der Wallbox-Instanz bietet Symcon an, die Cloud-Instanz mit anzuleg
 
 ## Installation
 
-In Symcon: **Kerninstanzen → Modulverwaltung (Module Control) → Hinzufügen** und diese Adresse eintragen:
+Im **Module Store** (Kanal Beta) unter „Easee Wallbox“ – oder in Symcon: **Kerninstanzen → Modulverwaltung (Module Control) → Hinzufügen** und diese Adresse eintragen:
 
 ```
 https://github.com/peterchrisben/EaseeWallbox

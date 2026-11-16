@@ -7,6 +7,9 @@
 #### Behoben
 - **Symcon 9.1:** Die Statustexte (Status, Strombegrenzung, Phasenmodus Wallbox) werden als Wertanzeige mit Intervallen dargestellt. Symcon 9.1 prüft die Parameter von Darstellungen streng und bricht „Übernehmen“ bei unbekannten Unterparametern ab – dann würden die Variablen nicht angelegt. Die Intervalle enthalten jetzt nur noch die nötigen Angaben (derselbe Aufbau läuft bei einem anderen Modul unter 9.1 bestätigt). Unter Symcon 9.0 ändert sich nichts.
 
+#### Dokumentation
+- README: Installation über den Module Store (Beta).
+
 ### Build 16 (13.11.2026)
 
 #### Geändert
