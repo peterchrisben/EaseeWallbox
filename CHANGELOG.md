@@ -2,6 +2,14 @@
 
 ## Version 1.0
 
+### Build 19 (21.11.2026)
+
+#### Geändert
+- Bereich und Schalter heißen jetzt ausdrücklich **„NRG-Stack EMS“** bzw. „Messwerte für das NRG-Stack EMS bereitstellen“ (vorher allgemein „Energiemanager“). Die Einstellung bleibt erhalten.
+
+#### Dokumentation
+- README: Abschnitt „NRG-Stack EMS (nur Messen)“.
+
 ### Build 18 (20.11.2026)
 
 #### Neu

@@ -343,20 +343,20 @@
         {
             "type": "ExpansionPanel",
             "name": "EmsPanel",
-            "caption": "Energiemanager",
+            "caption": "NRG-Stack EMS",
             "items": [
                 {
                     "type": "CheckBox",
                     "name": "EmsInterface",
-                    "caption": "Messwerte für einen Energiemanager bereitstellen"
+                    "caption": "Messwerte für das NRG-Stack EMS bereitstellen"
                 },
                 {
                     "type": "Label",
-                    "caption": "An: Ein Energiemanager, der die Schnittstelle „charger“ unterstützt (z. B. NRG-Stack EMS), findet die Wallbox selbst und liest Ladeleistung, Zählerstand, Status und „Fahrzeug verbunden“ mit. Er steuert die Wallbox nicht – das bleibt bei diesem Modul (Ziel-Ladeleistung)."
+                    "caption": "An: Das NRG-Stack EMS (ab Version 0.110.0) findet die Wallbox selbst und liest Ladeleistung, Zählerstand, Status und „Fahrzeug verbunden“ mit. Es steuert die Wallbox nicht – das bleibt bei diesem Modul (Ziel-Ladeleistung)."
                 },
                 {
                     "type": "Label",
-                    "caption": "Zeigt das Modul die Leistung in kW an, kommt die Variable „Ladeleistung (W)“ dazu. Solange das Häkchen gesetzt ist, fragt das Modul die Cloud spätestens alle 5 Minuten ab, damit die Werte nie älter als 10 Minuten sind."
+                    "caption": "Zeigt das Modul die Leistung in kW an, kommt die Variable „Ladeleistung (W)“ dazu. Solange der Schalter an ist, fragt das Modul die Cloud spätestens alle 5 Minuten ab, damit die Werte nie älter als 10 Minuten sind."
                 }
             ]
         }
