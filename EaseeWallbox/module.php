@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 require_once __DIR__ . '/../libs/EaseeCalc.php';
+require_once __DIR__ . '/../libs/EaseeEMS.php'; // EMS: Schnittstelle für Energiemanager
 
 /**
  * Easee Wallbox (Gerät)
@@ -13,6 +14,8 @@ require_once __DIR__ . '/../libs/EaseeCalc.php';
  */
 class EaseeWallbox extends IPSModule
 {
+    use EaseeEMS; // EMS: Schnittstelle für Energiemanager (libs/EaseeEMS.php)
+
     private const TO_PARENT = '{2B9E74AC-9022-4EC7-B69F-1DAA196FCFF2}';
     private const SPLITTER = '{5FD11832-BF89-40A8-B49B-405783EEB6B5}';
 
@@ -73,6 +76,8 @@ class EaseeWallbox extends IPSModule
         // Phasenumschaltung
         // Build 16: Die Easee pausiert beim Phasenwechsel selbst – keine eigene Pause mehr, nur Meldung
         $this->RegisterPropertyBoolean('LogPhaseSwitch', true);
+
+        $this->EmsCreate(); // EMS: Schnittstelle für Energiemanager
 
         // Schutzlogik (nur ControlMode 1)
         $this->RegisterPropertyInteger('StartDelay', 60);
@@ -276,6 +281,7 @@ class EaseeWallbox extends IPSModule
             case 'Observation':
                 $this->ApplyObservation((int) $data['ID'], $data['Value'] ?? null);
                 $this->SetValue('LastUpdate', time());
+                $this->EmsSeen(); // EMS: letzter Kontakt
                 if (!$this->IsActive()) {
                     // Ausgeschaltet: Werte per Push weiter anzeigen, aber nichts regeln
                     $this->StopTimers();
@@ -330,6 +336,15 @@ class EaseeWallbox extends IPSModule
     // ---------------------------------------------------------------------
     // Öffentliche Funktionen (EASEE_...)
     // ---------------------------------------------------------------------
+
+    /**
+     * EMS: Messwerte für einen Energiemanager (Vertrag „charger“ 1.13, z. B. NRG-Stack EMS).
+     * Liefert eine leere Liste, solange „Schnittstelle für Energiemanager“ aus ist.
+     */
+    public function GetFunctions(): array
+    {
+        return $this->EmsFunctions();
+    }
 
     /** Ladeleistung in der eingestellten Einheit (kW oder W) vorgeben. */
     public function SetChargingPower(float $Power): bool
@@ -510,6 +525,7 @@ class EaseeWallbox extends IPSModule
             $this->SetValue('Power', $current === 1 ? $power * 1000 : $power / 1000);
         }
         $this->WriteAttributeInteger('LastUnit', $current);
+        $this->EmsVariables(); // EMS: Leistung in W (nach einer Umrechnung der Einheit)
 
         if (!$this->ReadAttributeBoolean('Initialized')) {
             $this->SetValue('ChargingAllowed', true);
@@ -885,6 +901,7 @@ class EaseeWallbox extends IPSModule
             }
         }
         $this->SetValue('LastUpdate', time());
+        $this->EmsSeen(); // EMS: letzter Kontakt
         $this->SchedulePoll();
         return true;
     }
@@ -905,6 +922,7 @@ class EaseeWallbox extends IPSModule
                 }
             }
         }
+        $seconds = $this->EmsPollCap($seconds); // EMS: Werte nie älter als 10 min
         // Nie schneller als alle 10 s (Limit 100 Abfragen / 5 min für alle Instanzen zusammen)
         $this->SetTimerInterval('TimerPoll', max(10, $seconds) * 1000);
     }
@@ -937,6 +955,7 @@ class EaseeWallbox extends IPSModule
                 break;
             case 120: // Total power kW
                 $this->SetIfChanged('Power', round($kw ? (float) $value : (float) $value * 1000, $kw ? 3 : 0));
+                $this->EmsPower((float) $value); // EMS: Leistung in W
                 if ((float) $value > 0.1) {
                     $this->Guard();
                 }

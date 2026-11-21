@@ -3,7 +3,7 @@
 Symcon-Bibliothek für die **Easee Home** Wallbox über die Easee-Cloud.
 Die Ladeleistung lässt sich von außen vorgeben (Skript, Ablaufplan, Energiemanager). Für den Wallbox-Baustein von Loxone gibt es eine passende Darstellung.
 
-**Aktuelle Version:** 1.0 (Build 17, 16.11.2026)
+**Aktuelle Version:** 1.0 (Build 18, 20.11.2026)
 
 ## Warum Cloud?
 
@@ -86,6 +86,16 @@ Mit der Einstellung **„Zählerstand zwischen den Cloud-Updates fortschreiben�
 - Im Debug zeigt „Zählerstand“ jeden Cloud-Wert und jeden Neustart des Ladevorgangs – so lässt sich prüfen, wie nah die Fortschreibung am echten Wert liegt.
 - **Ohne Häkchen** wird der Cloud-Wert unverändert angezeigt (Verhalten bis Build 14). Wer einen eigenen Zähler an der Wallbox hat, braucht die Fortschreibung nicht.
 
+## Energiemanager (nur Messen)
+
+Mit **„Messwerte für einen Energiemanager bereitstellen“** (Bereich Energiemanager, Standard aus) bietet die Instanz ihre Messwerte nach der Schnittstelle „charger“ (Version 1.13) des NRG-Stack an ([Beschreibung](https://github.com/DG65/NRGChargerHub/blob/main/docs/EIGENES_WALLBOX_MODUL.md)). Ein Energiemanager, der diese Schnittstelle unterstützt – z. B. das NRG-Stack EMS ab Version 0.110.0 –, findet die Wallbox dann selbst über `EASEE_GetFunctions` und liest mit:
+
+- Ladeleistung in **Watt** – zeigt das Modul kW an, kommt dafür die Variable „Ladeleistung (W)“ dazu
+- Zählerstand (kWh, mit Fortschreibung), Status, Fahrzeug verbunden, aktive Phasen, Seriennummer
+- Zeitpunkt des letzten Kontakts zur Cloud (zählt nicht, solange die Wallbox als offline gemeldet ist)
+
+**Gesteuert wird die Wallbox darüber nicht** – das bleibt bei diesem Modul (Ziel-Ladeleistung). Der Energiemanager bekommt dazu die Angabe „wird von einem anderen System geregelt“. Damit die Werte nie älter als 10 Minuten sind, fragt das Modul die Cloud bei gesetztem Häkchen spätestens alle 5 Minuten ab (kostet etwa eine Abfrage je 5 Minuten).
+
 ## Regelmodus
 
 **Beim ersten Verbinden** sendet das Modul nichts an die Wallbox. Es übernimmt den aktuellen Strom der Wallbox als „Ziel-Ladeleistung (Tp)“ (z. B. 16 A × 3 Phasen → 11,04 kW). Erst wenn du oder Loxone eine Vorgabe setzt, regelt das Modul.
@@ -157,6 +167,7 @@ EASEE_SetCableLock(int $InstanzID, bool $Verriegeln);
 EASEE_SetChargerPhaseModeAuto(int $InstanzID);
 EASEE_Reboot(int $InstanzID);
 EASEE_GetCalculation(int $InstanzID);                      // Text: was würde gesendet
+EASEE_GetFunctions(int $InstanzID);                        // Messwerte für einen Energiemanager (leer, wenn aus)
 EASEECLOUD_TestConnection(int $InstanzID);
 EASEECLOUD_ReconnectPush(int $InstanzID);
 ```

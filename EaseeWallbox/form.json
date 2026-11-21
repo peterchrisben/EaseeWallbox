@@ -339,6 +339,26 @@
                     "caption": "Der Wert läuft nie rückwärts. Liegt er beim nächsten Cloud-Wert etwas zu hoch, bleibt er kurz stehen, bis der echte Zählerstand ihn eingeholt hat. Ohne Häkchen wird der Cloud-Wert unverändert angezeigt (wie bisher)."
                 }
             ]
+        },
+        {
+            "type": "ExpansionPanel",
+            "name": "EmsPanel",
+            "caption": "Energiemanager",
+            "items": [
+                {
+                    "type": "CheckBox",
+                    "name": "EmsInterface",
+                    "caption": "Messwerte für einen Energiemanager bereitstellen"
+                },
+                {
+                    "type": "Label",
+                    "caption": "An: Ein Energiemanager, der die Schnittstelle „charger“ unterstützt (z. B. NRG-Stack EMS), findet die Wallbox selbst und liest Ladeleistung, Zählerstand, Status und „Fahrzeug verbunden“ mit. Er steuert die Wallbox nicht – das bleibt bei diesem Modul (Ziel-Ladeleistung)."
+                },
+                {
+                    "type": "Label",
+                    "caption": "Zeigt das Modul die Leistung in kW an, kommt die Variable „Ladeleistung (W)“ dazu. Solange das Häkchen gesetzt ist, fragt das Modul die Cloud spätestens alle 5 Minuten ab, damit die Werte nie älter als 10 Minuten sind."
+                }
+            ]
         }
     ],
     "actions": [

@@ -2,6 +2,16 @@
 
 ## Version 1.0
 
+### Build 18 (20.11.2026)
+
+#### Neu
+- **Messwerte für einen Energiemanager** (Bereich „Energiemanager“, Standard aus): Die Instanz bietet ihre Messwerte nach der Schnittstelle „charger“ 1.13 des NRG-Stack an (`EASEE_GetFunctions`). Ein Energiemanager wie das NRG-Stack EMS findet die Wallbox damit selbst und liest Ladeleistung (W), Zählerstand, Status, „Fahrzeug verbunden“, aktive Phasen und den letzten Kontakt mit. Gesteuert wird darüber nichts.
+- Variable „Ladeleistung (W)“ – nur bei gesetztem Häkchen und Einheit kW.
+- Bei gesetztem Häkchen fragt das Modul die Cloud spätestens alle 5 Minuten ab, damit die Werte nie älter als 10 Minuten sind.
+
+#### Dokumentation
+- README: Abschnitt „Energiemanager (nur Messen)“, `EASEE_GetFunctions` bei den öffentlichen Funktionen.
+
 ### Build 17 (16.11.2026)
 
 #### Behoben

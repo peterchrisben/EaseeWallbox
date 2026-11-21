@@ -43,6 +43,12 @@
 - Eine Discovery passt nicht (die sucht im eigenen Netzwerk und muss ohne Einrichtung laufen; die Easee ist nur über das Cloud-Konto erreichbar).
 - **Wann:** Wenn sich Nutzer mit mehreren Wallboxen melden.
 
+### Energiemanager: Steuern über die Schnittstelle „charger“ (NRG-Stack EMS)
+- Messen ist seit Build 18 drin (`EASEE_GetFunctions`, libs/EaseeEMS.php). Fehlt noch das Steuern.
+- Steuern (mittlerer Umbau): Variablen `ctl_enable` (Freigabe), `ctl_curr_limit` (A) und `ctl_phase_mode` (1/3) mit Aktion; Pause nur über die Freigabe; Variable erst setzen, wenn die Wallbox den Befehl angenommen hat, sonst Ausnahme; Werte auf Min/Max-Strom klemmen. Rückfall nötig (`failsafeSec` > 0, Totmann: das EMS schreibt spätestens nach der halben Zeit neu – unveränderte Werte nicht an die Cloud senden). Auswahl „Wer gibt die Ladeleistung vor?“ (Ziel-Ladeleistung → managedBy other / Energiemanager → ems). Schreibstatus-Variablen `ctl_write_*`. Offen: sicherer Zustand beim Rückfall (Pause oder Wallbox-Einstellung).
+- Schnittstelle: https://github.com/DG65/NRGChargerHub/blob/main/docs/EIGENES_WALLBOX_MODUL.md
+- **Wann:** Wenn Nutzer das EMS mit der Easee nutzen und steuern wollen.
+
 ## Noch zu testen (mit Auto)
 - ✔ 04.10.2026: 1-phasig 6–15 A, 3-phasig 15 A, Pause, Wechsel 1 → 3 (mit Pause) und 3 → 1 (ohne Pause) funktionieren.
 - ✔ Wächter „lädt trotz Pause“ hat in der Praxis gegriffen (04.10.2026, 13:17). Offen: Anstecken bei Vorgabe 0, Einschalten der Wallbox bei Vorgabe 0.
