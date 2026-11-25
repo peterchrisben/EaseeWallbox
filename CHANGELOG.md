@@ -2,6 +2,14 @@
 
 ## Version 1.0
 
+### Build 20 (25.11.2026)
+
+#### Behoben
+- **Symcon 9.1:** Lange Beschriftungen von Eingabefeldern werden dort umgebrochen und überlagern das Feld darüber (unter 9.0 wurden sie mit „…“ gekürzt). Vier Beschriftungen gekürzt, die Erklärung steht jetzt jeweils in einer Zeile darunter: „Seriennummer der Wallbox“ (Beispiel EH123456), „Vorgabe unter Mindeststrom“ (unter ca. 1,4 kW), „Vorgabe zwischen 1- und 3-phasig“ (ca. 3,7–4,1 kW), „Anschluss der Wallbox“ (nur für die Anzeige der Ströme). Die Einstellungen bleiben erhalten.
+
+#### Neu
+- `tests/FormularTest.php`: prüft alle Formulare, Beschriftungen von Eingabefeldern höchstens 38 Zeichen.
+
 ### Build 19 (21.11.2026)
 
 #### Geändert

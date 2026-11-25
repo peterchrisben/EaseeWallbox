@@ -12,7 +12,12 @@
         {
             "type": "ValidationTextBox",
             "name": "ChargerID",
-            "caption": "Seriennummer der Wallbox (z. B. EH123456)"
+            "caption": "Seriennummer der Wallbox"
+        },
+        {
+            "type": "Label",
+            "name": "ChargerIDHint",
+            "caption": "z. B. EH123456 – steht auf dem Typenschild und in der Easee-App."
         },
         {
             "type": "CheckBox",
@@ -113,7 +118,7 @@
                 {
                     "type": "Select",
                     "name": "UnderMinimum",
-                    "caption": "Vorgabe unter Mindeststrom (ca. 1,4 kW)",
+                    "caption": "Vorgabe unter Mindeststrom",
                     "options": [
                         {
                             "caption": "Pause",
@@ -126,9 +131,14 @@
                     ]
                 },
                 {
+                    "type": "Label",
+                    "name": "UnderMinimumHint",
+                    "caption": "Gilt für Vorgaben unter ca. 1,4 kW."
+                },
+                {
                     "type": "Select",
                     "name": "GapMode",
-                    "caption": "Vorgabe zwischen 1- und 3-phasig (ca. 3,7 – 4,1 kW)",
+                    "caption": "Vorgabe zwischen 1- und 3-phasig",
                     "options": [
                         {
                             "caption": "Nicht überschreiten (1-phasig Maximum)",
@@ -139,6 +149,11 @@
                             "value": 1
                         }
                     ]
+                },
+                {
+                    "type": "Label",
+                    "name": "GapModeHint",
+                    "caption": "Gilt für Vorgaben zwischen ca. 3,7 und 4,1 kW."
                 },
                 {
                     "type": "Select",
@@ -197,7 +212,7 @@
                 {
                     "type": "Select",
                     "name": "GridType",
-                    "caption": "Anschluss der Wallbox (für die Anzeige der Ströme)",
+                    "caption": "Anschluss der Wallbox",
                     "options": [
                         {
                             "caption": "3 Phasen + N + PE (in Deutschland üblich)",
@@ -208,6 +223,11 @@
                             "value": 1
                         }
                     ]
+                },
+                {
+                    "type": "Label",
+                    "name": "GridTypeHint",
+                    "caption": "Nur für die Anzeige der Ströme."
                 }
             ]
         },

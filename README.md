@@ -3,7 +3,7 @@
 Symcon-Bibliothek für die **Easee Home** Wallbox über die Easee-Cloud.
 Die Ladeleistung lässt sich von außen vorgeben (Skript, Ablaufplan, Energiemanager). Für den Wallbox-Baustein von Loxone gibt es eine passende Darstellung.
 
-**Aktuelle Version:** 1.0 (Build 19, 21.11.2026)
+**Aktuelle Version:** 1.0 (Build 20, 25.11.2026)
 
 ## Warum Cloud?
 
@@ -175,6 +175,7 @@ EASEECLOUD_ReconnectPush(int $InstanzID);
 ## Testreihenfolge
 
 1. `tests/RechenTest.php` als Skript in Symcon ausführen (prüft nur die Umrechnung).
+   `php tests/FormularTest.php` (ohne Symcon) prüft, dass keine Beschriftung eines Eingabefelds länger als 38 Zeichen ist.
 2. Cloud-Instanz: „Verbindung testen“.
 3. Wallbox-Instanz: Seriennummer eintragen, Werte beobachten. Kommen sie per Push? Das zeigt die Variable „Push verbunden“ in der Cloud-Instanz.
 4. Ohne Auto: „Berechnung anzeigen“ mit verschiedenen Vorgaben.
